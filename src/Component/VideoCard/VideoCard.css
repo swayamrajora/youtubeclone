@@ -1,0 +1,41 @@
+.video-card {
+  width: 350px;
+  font-family: Arial, sans-serif;
+}
+
+.thumbnail-container {
+  position: relative;
+  width: 100%;
+}
+
+.thumbnail-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.video-duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 2px 6px;
+  font-size: 13px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.video-info {
+  margin-top: 10px;
+}
+
+.video-info h4 {
+  font-size: 16px;
+  margin: 4px 0;
+}
+
+.video-info p {
+  font-size: 14px;
+  color: #555;
+}
