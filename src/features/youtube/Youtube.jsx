@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 const App = () => {
-  const [videos, setVideos] = useState([])
-const API_KEY = import.meta.env.VITE_API_KEY
-VITE_API_KEY="AIzaSyCsNX8Xyoapr-psFZmS7ODcMSrT0m6oSyQ"
+  const [videos, setVideos] = useState([]);
+
+  // ✅ Use import.meta.env directly (your current VITE_API_KEY="..." line should be in .env only)
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     async function fetchVideos() {
@@ -13,47 +15,50 @@ VITE_API_KEY="AIzaSyCsNX8Xyoapr-psFZmS7ODcMSrT0m6oSyQ"
           {
             params: {
               key: API_KEY,
-              q: 'mango',       
+              q: 'mango',
               part: 'snippet',
               maxResults: 10,
               type: 'video'
             }
           }
-        )
-        setVideos(response.data.items)
+        );
+        setVideos(response.data.items);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
-    fetchVideos()
-  }, [])
+
+    fetchVideos();
+  }, []);
 
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       <h2>YouTube Videos</h2>
-      <ul>
+      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
         {videos.map((item) => (
-          <li key={item.id.videoId}>
-            {/* <a
-              href={`https://www.youtube.com/watch?v=${item.id.videoId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-             
-            </a> */}
-
-            <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} 
-            title={item.snippet.title}
-            width="350"
-            height="200"
-            allowFullScreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
+          <li key={item.id.videoId} style={{ flex: '1 0 300px' }}>
+            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+              <iframe
+                src={`https://www.youtube.com/embed/${item.id.videoId}`}
+                title={item.snippet.title}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                }}
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              ></iframe>
+            </div>
+            <p>{item.snippet.title}</p>
           </li>
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
